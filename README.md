@@ -174,8 +174,6 @@ cd /Path/To/MARLlib/patch
 python add_patch.py -y -p
 ```
 
-**y** to replace source-packages code
-
 **Attention**: Above is the common installation. Each environment needs extra dependency. Please read the installation instruction in envs/base_env/install.
 
 
@@ -284,7 +282,7 @@ We provide an introduction to the code directory to help you get familiar with t
 
 ## Experiment Results
 
-
+All results are listed [here](https://github.com/ICLR2023Paper4242/MARLlib/tree/main/results).
 
 ## Contribute
 
