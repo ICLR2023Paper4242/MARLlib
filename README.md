@@ -199,10 +199,55 @@ pip install gym==1.21.0
 ```
 
 ### Step 3. Start training
+
 ```
 cd /Path/To/MARLlib
+python marl/main.py --algo_config=$algo [--finetuned] --env_config=$env with env_args.map_name=$map
+```
+
+Available algorithms (case sensitive):
+
+- iql
+- pg
+- a2c
+- ddpg
+- trpo
+- ppo
+- maa2c
+- coma
+- maddpg
+- matrpo
+- mappo
+- hatrpo
+- happo
+- vdn
+- qmix
+- facmac
+- vda2c
+- vdppo
+
+Available env-map pairs (case sensitive):
+
+- smac: [smac maps](https://github.com/oxwhirl/smac/blob/master/smac/env/starcraft2/maps/smac_maps.py)
+- mpe: [mpe map](https://github.com/ICLR2023Paper4242/MARLlib/blob/main/envs/base_env/mpe.py)
+- mamujoco: [mamujoco map](https://github.com/ICLR2023Paper4242/MARLlib/blob/main/envs/base_env/mamujoco.py)
+- football: [football map](https://github.com/ICLR2023Paper4242/MARLlib/blob/main/envs/base_env/mamujoco.py)
+- magent: [magent map](https://github.com/ICLR2023Paper4242/MARLlib/blob/main/envs/base_env/magent.py)
+- lbf: use [lbf config](https://github.com/ICLR2023Paper4242/MARLlib/blob/main/envs/base_env/config/lbf.yaml) to generate the map. Details can be found https://github.com/semitable/lb-foraging#usage
+- rware: use [rware config](https://github.com/ICLR2023Paper4242/MARLlib/blob/main/envs/base_env/config/rware.yaml) to generate the map. Details can be found https://github.com/semitable/robotic-warehouse#naming-scheme
+- pommerman: OneVsOne-v0, PommeFFACompetition-v0, PommeTeamCompetition-v0
+- metadrive: Bottleneck, ParkingLot, Intersection, Roundabout, Tollgate
+- hanabi: Hanabi-Very-Small, Hanabi-Full, Hanabi-Full-Minimal, Hanabi-Small
+
+--finetuned is optional, force using the finetuned hyperparameter if available in [this directory](https://github.com/ICLR2023Paper4242/MARLlib/tree/main/marl/algos/hyperparams/finetuned)
+
+
+Example on SMAC:
+
+```
 python marl/main.py --algo_config=MAPPO [--finetuned] --env_config=smac with env_args.map_name=3m
 ```
+
 --finetuned is optional, force using the finetuned hyperparameter if available.
 
 
