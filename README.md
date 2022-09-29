@@ -141,6 +141,9 @@ Here we provide a table for the comparison of MARLlib and existing work.
 ## Installation
 
 
+To use MARLlib, first install MARLlib, then install desired environments following [this guide](https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html), finally install patches for RLlib. After installation, training can be launched by following the usage section below.
+
+
 ### Install MARLlib
 
 ```bash
@@ -157,6 +160,10 @@ Here we provide a table for the comparison of MARLlib and existing work.
     pip install -e .
 ```
 
+
+### Install environments
+
+Please follow [this guide](https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html).
 
 ### Install patches for RLlib
 
