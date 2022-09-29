@@ -181,8 +181,6 @@ cd /Path/To/MARLlib/patch
 python add_patch.py -y -p
 ```
 
-**Attention**: Above is the common installation. Each environment needs extra dependency. Please read the installation instruction in envs/base_env/install.
-
 
 
 ## Usage
