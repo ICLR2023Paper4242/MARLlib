@@ -167,6 +167,13 @@ cd /Path/To/MARLlib/patch
 python add_patch.py -y
 ```
 
+For pommerman users, run
+
+```
+cd /Path/To/MARLlib/patch
+python add_patch.py -y -p
+```
+
 **y** to replace source-packages code
 
 **Attention**: Above is the common installation. Each environment needs extra dependency. Please read the installation instruction in envs/base_env/install.
@@ -299,21 +306,5 @@ Things not essential:
 The ten environments we already contained have covered great diversity in action space,  observation space, agent-env interaction style, task mode, additional information like action mask, etc. 
 The best practice to incorporate your environment is to find an existing similar one and provide the same interface.
 
-## Bug Shooting
-
-Our patch files fix most RLlib-related errors on MARL.
-
-Here we only list the common bugs, not RLlib-related. (Mostly is your mistake)
-
-- *observation/action out of space* bug:
-    - make sure the observation/action space defined in env init function 
-        - has same data type with env returned data (e.g., float32/64)
-        - env returned data range is in the space scope (e.g., box(-2,2))
-    - the returned env observation contained the required key (e.g., action_mask/state)
-    
-- *Action NaN is invaild* bug
-    - this is common bug in continuous control problem, carefully finetune the algorithm's hyperparameter
-        - smaller learning rate
-        - set some action value bound
 
     
