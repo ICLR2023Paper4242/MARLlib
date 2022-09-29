@@ -175,7 +175,7 @@ There are four configuration files you need to ensure correctness for your train
 
 ### Step 2. Making sure all the dependency are installed for your environment.
 
-You can refer to [here](https://iclr2023-marllib.readthedocs.io/en/latest/handbook/env.html) to install the environment.
+You can refer to [here](https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html) to install the environment.
 After everything settled, make sure to change back you Gym version to 1.21.0.
 All environment MARLlib supported should work fine with this version.
 
