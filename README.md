@@ -140,19 +140,34 @@ Here we provide a table for the comparison of MARLlib and existing work.
 
 ## Installation
 
-Install Ray 
-```
-pip install ray==1.8.0 # version sensitive
+
+### Install MARLlib
+
+```bash
+    conda create -n marllib python==3.8
+    conda activate marllib
+    # please install pytorch <= 1.9.1 compatible with your hardware.
+
+    pip install ray==1.8.0
+    pip install ray[tune]
+    pip install ray[rllib]
+
+    git clone https://github.com/ICLR2023Paper4242/MARLlib.git
+    cd MARLlib
+    pip install -e .
 ```
 
 
-Add patch of MARLlib
+### Install patches for RLlib
+
+We fix bugs of RLlib by providing patches. After installing Ray, run the following command:
+
 ```
 cd /Path/To/MARLlib/patch
 python add_patch.py -y
 ```
 
-**Y** to replace source-packages code
+**y** to replace source-packages code
 
 **Attention**: Above is the common installation. Each environment needs extra dependency. Please read the installation instruction in envs/base_env/install.
 
