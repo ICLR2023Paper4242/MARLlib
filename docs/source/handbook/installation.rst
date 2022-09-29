@@ -33,7 +33,7 @@ External Environments Requirements
 
 External environments are not auto-integrated. However, you can install them by following.
 
-* our simplified guides.
+* `our simplified guides <https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html>`_.
 * the official guide of each environment.
 
 
