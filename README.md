@@ -158,6 +158,7 @@ To use MARLlib, first install MARLlib, then install desired environments followi
     git clone https://github.com/ICLR2023Paper4242/MARLlib.git
     cd MARLlib
     pip install -e .
+    pip install icecream && pip install supersuit && pip install gym==0.21.0 && pip install importlib-metadata==4.13.0 
 ```
 
 
@@ -174,13 +175,13 @@ cd /Path/To/MARLlib/patch
 python add_patch.py -y
 ```
 
-For pommerman users, run
+If pommerman is installed and used as your testing bed, run
 
 ```
 cd /Path/To/MARLlib/patch
 python add_patch.py -y -p
 ```
-
+follow the guide [here](https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html#pommerman) before you starting training.
 
 
 ## Usage
@@ -252,15 +253,26 @@ Available env-map pairs (case sensitive):
 --finetuned is optional, force using the finetuned hyperparameter if available in [this directory](https://github.com/ICLR2023Paper4242/MARLlib/tree/main/marl/algos/hyperparams/finetuned)
 
 
-Example on SMAC:
+Example on SMAC (you need install SMAC environment follow the guide [here](https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html#smac)):
 
 ```
 python marl/main.py --algo_config=mappo [--finetuned] --env_config=smac with env_args.map_name=3m
 ```
-
 --finetuned is optional, force using the finetuned hyperparameter if available.
 
 
+## Docker
+We also provide docker-based usage for MARLlib. 
+
+```
+cd Your/Path/To/MARLlib/docker
+bash build.sh
+docker run -d -it marllib:1.0
+docker exec -it [your_container_name] # you can get this by this command: docker ps
+python marl/main.py --algo_config=mappo --env_config=lbf with env_args.map_name=lbf-8x8-2p-2f-3s-c
+```
+Note we only pre-install LBF in the marllib:1.0 as a quick example and all running/algorithm/task configurations are remained as default.
+You may also need root access to use docker.
 
 ## Navigation
 
@@ -288,6 +300,19 @@ We provide an introduction to the code directory to help you get familiar with t
 ## Experiment Results
 
 All results are listed [here](https://github.com/ICLR2023Paper4242/MARLlib/tree/main/results).
+
+## Bug Shooting
+
+- Environment side bug: e.g., SMAC is not installed properly.
+    - Cause of bug: environment not installed properly (dependency, version, ...)
+    - Solution: find the bug description in the log printed, especailly the table status at the initial part.
+- Gym related bug:
+    - Cause of bug: gym version required by RLlib and Environment has conflict
+    - Solution: always change gym version back to 0.21.0 after new package installation.
+- Package missing:
+    - Cause of bug: miss installing package or incorrect Python Path
+    - Solution: install the package and check you current PYTHONPATH
+    
 
 ## Contribute
 
