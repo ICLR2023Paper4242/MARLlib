@@ -266,16 +266,21 @@ python marl/main.py --algo_config=mappo [--finetuned] --env_config=smac with env
 
 ## Docker
 We also provide docker-based usage for MARLlib. 
+Before use, make sure [docker](https://docs.docker.com/desktop/install/linux-install/) is installed on your machine.
 
 ```
-cd Your/Path/To/MARLlib/docker
-bash build.sh
+git clone https://github.com/ICLR2023Paper4242/MARLlib.git
+cd MARLlib
+bash docker/build.sh
 docker run -d -it marllib:1.0
-docker exec -it [your_container_name] # you can get this by this command: docker ps
+docker exec -it [your_container_name] # you can get container_name by this command: docker ps
+python patch/add_patch.py -y
+# launch the training in docker under project directory
 python marl/main.py --algo_config=mappo --env_config=lbf with env_args.map_name=lbf-8x8-2p-2f-3s-c
 ```
-Note we only pre-install LBF in the marllib:1.0 as a quick example and all running/algorithm/task configurations are remained as default.
-You may also need root access to use docker.
+
+Note we only pre-install [LBF](https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html#lbf) in the target container marllib:1.0 as a fast example. All running/algorithm/task configurations are kept unchanged.
+You may also need root access to use docker or add #sudo#.
 
 ## Navigation
 
