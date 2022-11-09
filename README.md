@@ -21,6 +21,9 @@ There are four core features of **MARLlib**.
 <img src=image/overview.png width=100% />
 </div>
 
+## News
+
+- 09/11/2022 MARLlib is now available on [docker](https://github.com/ICLR2023Paper4242/MARLlib#docker)!!
 
 ## Overview
 
