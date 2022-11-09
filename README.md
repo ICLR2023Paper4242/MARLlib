@@ -274,8 +274,9 @@ cd MARLlib
 bash docker/build.sh
 docker run -d -it marllib:1.0
 docker exec -it [your_container_name] # you can get container_name by this command: docker ps
+# now we are in docker /workspace/MARLlib
 python patch/add_patch.py -y
-# launch the training in docker under project directory
+# launch the training
 python marl/main.py --algo_config=mappo --env_config=lbf with env_args.map_name=lbf-8x8-2p-2f-3s-c
 ```
 
