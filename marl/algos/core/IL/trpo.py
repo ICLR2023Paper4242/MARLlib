@@ -1,3 +1,9 @@
+"""
+Implement TRPO and HATRPO in Ray Rllib
+__author__: nobody
+__data__: May-15
+"""
+
 import logging
 from typing import List, Type, Union
 from ray.rllib.models.torch.torch_action_dist import TorchDistributionWrapper
