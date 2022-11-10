@@ -150,18 +150,18 @@ To use MARLlib, first install MARLlib, then install desired environments followi
 ### Install MARLlib
 
 ```bash
-    conda create -n marllib python==3.8
-    conda activate marllib
-    # please install pytorch <= 1.9.1 compatible with your hardware.
+conda create -n marllib python==3.8
+conda activate marllib
+# please install pytorch <= 1.9.1 compatible with your hardware.
 
-    pip install ray==1.8.0
-    pip install ray[tune]
-    pip install ray[rllib]
+pip install ray==1.8.0
+pip install ray[tune]
+pip install ray[rllib]
 
-    git clone https://github.com/ICLR2023Paper4242/MARLlib.git
-    cd MARLlib
-    pip install -e .
-    pip install icecream && pip install supersuit && pip install gym==0.21.0 && pip install importlib-metadata==4.13.0 
+git clone https://github.com/ICLR2023Paper4242/MARLlib.git
+cd MARLlib
+pip install -e .
+pip install icecream && pip install supersuit && pip install gym==0.21.0 && pip install importlib-metadata==4.13.0 
 ```
 
 
@@ -173,14 +173,14 @@ Please follow [this guide](https://iclr2023marllib.readthedocs.io/en/latest/hand
 
 We fix bugs of RLlib by providing patches. After installing Ray, run the following command:
 
-```
+```bash
 cd /Path/To/MARLlib/patch
 python add_patch.py -y
 ```
 
 If pommerman is installed and used as your testing bed, run
 
-```
+```bash
 cd /Path/To/MARLlib/patch
 python add_patch.py -y -p
 ```
@@ -208,13 +208,13 @@ You can refer to [here](https://iclr2023marllib.readthedocs.io/en/latest/handboo
 After everything settled, make sure to change back you Gym version to 0.21.0.
 All environment MARLlib supported should work fine with this version.
 
-```
+```bash
 pip install gym==0.21.0
 ```
 
 ### Step 3. Start training
 
-```
+```bash
 cd /Path/To/MARLlib
 python marl/main.py --algo_config=$algo [--finetuned] --env_config=$env with env_args.map_name=$map
 ```
@@ -258,7 +258,7 @@ Available env-map pairs (case sensitive):
 
 Example on SMAC (you need install SMAC environment follow the guide [here](https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html#smac)):
 
-```
+```bash
 python marl/main.py --algo_config=mappo [--finetuned] --env_config=smac with env_args.map_name=3m
 ```
 --finetuned is optional, force using the finetuned hyperparameter if available.
@@ -268,12 +268,43 @@ python marl/main.py --algo_config=mappo [--finetuned] --env_config=smac with env
 We also provide docker-based usage for MARLlib. 
 Before use, make sure [docker](https://docs.docker.com/desktop/install/linux-install/) is installed on your machine.
 
-```
+### Use GPU in docker
+
+To use CUDA in MARLlib docker container, please first install [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html).
+
+To build MARLlib docker image, use the following command:
+
+```bash
 git clone https://github.com/ICLR2023Paper4242/MARLlib.git
 cd MARLlib
 bash docker/build.sh
-docker run -d -it marllib:1.0
-docker exec -it [your_container_name] # you can get container_name by this command: docker ps
+```
+
+Run `docker run --itd --rm --gpus all marllib:1.0` to create a new container and make GPU visible inside the container. Then attach into the container and run experiments:
+
+```bash
+docker attach [your_container_name] # you can get container_name by this command: docker ps
+# now we are in docker /workspace/MARLlib
+python patch/add_patch.py -y
+# modify config file
+# launch the training
+python marl/main.py --algo_config=mappo --env_config=lbf with env_args.map_name=lbf-8x8-2p-2f-3s-c
+```
+
+### Only use CPU in docker
+
+To build MARLlib docker image, use the following command:
+
+```bash
+git clone https://github.com/ICLR2023Paper4242/MARLlib.git
+cd MARLlib
+bash docker/build.sh
+```
+
+Run `docker run -d -it marllib:1.0` to create a new container. Then attach into the container and run experiments:
+
+```bash
+docker attach [your_container_name] # you can get container_name by this command: docker ps
 # now we are in docker /workspace/MARLlib
 python patch/add_patch.py -y
 # launch the training
