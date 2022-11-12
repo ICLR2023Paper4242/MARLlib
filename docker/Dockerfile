@@ -17,3 +17,5 @@ WORKDIR /workspace/MARLlib
 RUN pip install -e .
 
 RUN pip install icecream && pip install lbforaging==1.0.15 && pip install supersuit && pip install gym==0.21.0 && pip install importlib-metadata==4.13.0
+
+RUN python patch/add_patch.py -y
