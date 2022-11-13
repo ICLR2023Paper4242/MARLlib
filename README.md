@@ -268,7 +268,22 @@ python marl/main.py --algo_config=mappo [--finetuned] --env_config=smac with env
 We also provide docker-based usage for MARLlib. 
 Before use, make sure [docker](https://docs.docker.com/desktop/install/linux-install/) is installed on your machine.
 
-### Use GPU in docker
+Note: You need root access to use docker.
+
+### Ready to Go Image
+
+We prepare a docker image ready for MARLlib to run. [link](https://hub.docker.com/repository/docker/iclr2023paper4242/marllib)
+```bash
+docker pull iclr2023paper4242/marllib:1.0
+docker run -d -it --rm --gpus all iclr2023paper4242/marllib:1.0
+docker exec -it [container_name] # you can get container_name by this command: docker ps
+# launch the training
+python marl/main.py --algo_config=mappo --env_config=lbf with env_args.map_name=lbf-8x8-2p-2f-3s-c
+```
+
+### Alternatively, you can build your image on your local machine with two options: GPU or CPU only
+
+#### Use GPU in docker
 
 To use CUDA in MARLlib docker container, please first install [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html).
 
@@ -285,13 +300,12 @@ Run `docker run --itd --rm --gpus all marllib:1.0` to create a new container and
 ```bash
 docker attach [your_container_name] # you can get container_name by this command: docker ps
 # now we are in docker /workspace/MARLlib
-python patch/add_patch.py -y
-# modify config file
+# modify config file ray.yaml to enable GPU use
 # launch the training
 python marl/main.py --algo_config=mappo --env_config=lbf with env_args.map_name=lbf-8x8-2p-2f-3s-c
 ```
 
-### Only use CPU in docker
+#### Only use CPU in docker
 
 To build MARLlib docker image, use the following command:
 
@@ -306,13 +320,11 @@ Run `docker run -d -it marllib:1.0` to create a new container. Then attach into 
 ```bash
 docker attach [your_container_name] # you can get container_name by this command: docker ps
 # now we are in docker /workspace/MARLlib
-python patch/add_patch.py -y
 # launch the training
 python marl/main.py --algo_config=mappo --env_config=lbf with env_args.map_name=lbf-8x8-2p-2f-3s-c
 ```
 
 Note we only pre-install [LBF](https://iclr2023marllib.readthedocs.io/en/latest/handbook/env.html#lbf) in the target container marllib:1.0 as a fast example. All running/algorithm/task configurations are kept unchanged.
-You may also need root access to use docker or add #sudo#.
 
 ## Navigation
 
